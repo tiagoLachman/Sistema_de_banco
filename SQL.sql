@@ -1,0 +1,10 @@
+CREATE TABLE "Clientes" (
+	"id"	INTEGER NOT NULL,
+	"Cpf"	TEXT NOT NULL,
+	"Saldo"	REAL NOT NULL,
+	"Nome"	TEXT NOT NULL,
+	"Bloqueado"	INTEGER NOT NULL COLLATE BINARY,
+	"Senha"	TEXT NOT NULL,
+	UNIQUE("Cpf"),
+	PRIMARY KEY("id")
+)
