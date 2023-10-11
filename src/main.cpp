@@ -8,7 +8,7 @@ int main()
 {
     int      rc;
     sqlite3* db     = nullptr;
-    char*    dbFile = "C:/Users/Tiago/Documents/Projetos/C_C++/Sistema_de_banco/build/Debug/banco.db";
+    char*    dbFile = "banco.db";
 
     rc = sqlite3_open(dbFile, &db);
     if (rc != SQLITE_OK)
