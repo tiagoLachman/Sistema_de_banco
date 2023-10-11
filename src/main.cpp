@@ -21,6 +21,8 @@ int main()
     Cliente cliente(db);
     try
     {
+        //TODO: Menu básico
+
         //cliente.adicionar(string("nao"), string("12345"), "123Pin", false, 23.5);
         cliente.buscarPorCpf("123");
         cliente.logar("3123");
