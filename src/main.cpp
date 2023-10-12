@@ -6,7 +6,8 @@
 
 void mostrarCliente(Cliente* cliente)
 {
-    if(!cliente->getLogado()){
+    if (!cliente->getLogado())
+    {
         throw exception("Cliente nao logado\n");
     }
     printf("\nNome:%s\n", cliente->getNome().c_str());
@@ -30,7 +31,8 @@ int main()
     }
 
     Cliente cliente(db);
-    int     op = 0;
+
+    int op = 0;
     while (1)
     {
         try
@@ -91,7 +93,7 @@ int main()
             }
             else if (op == 7)
             {
-                
+
                 printf("Tenha uma otima semana!");
                 break;
             }
