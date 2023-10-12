@@ -40,6 +40,9 @@ public:
     {
         return this->Saldo;
     }
+    bool getLogado(){
+        return this->logado;
+    }
 
     void popObjecto(string field, char* value)
     {
@@ -72,6 +75,7 @@ public:
 
 
     void sacar(string Cpf, double valor);
+    void depositar(string Cpf, double valor);
     void logar(string senha);
     void deslogar();
 };

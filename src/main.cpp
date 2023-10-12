@@ -4,6 +4,17 @@
 #include <cliente.hpp>
 #include <iostream>
 
+void mostrarCliente(Cliente* cliente)
+{
+    if(!cliente->getLogado()){
+        throw exception("Cliente nao logado\n");
+    }
+    printf("\nNome:%s\n", cliente->getNome().c_str());
+    printf("Cpf:%s\n", cliente->getCpf().c_str());
+    printf("Saldo:%lf\n", cliente->getSaldo());
+    //printf("%i\n", cliente->getId());
+}
+
 int main()
 {
     int      rc;
@@ -19,21 +30,82 @@ int main()
     }
 
     Cliente cliente(db);
-    try
+    int     op = 0;
+    while (1)
     {
-        //TODO: Menu básico
+        try
+        {
+            printf("\n1->Adicionar cliente\n2->Logar na conta\n3->Sacar\n4->Depositar\n5->Mostrar conta\n6->Deslogar\n7->Sair\nR:");
+            scanf("%d", &op);
 
-        //cliente.adicionar(string("nao"), string("12345"), "123Pin", false, 23.5);
-        cliente.buscarPorCpf("123");
-        cliente.logar("3123");
-        cliente.sacar(cliente.getCpf(), 10.0);
-        printf("%s\n", cliente.getNome().c_str());
-        printf("%s\n", cliente.getCpf().c_str());
-        printf("%lf\n", cliente.getSaldo());
-        printf("%i\n", cliente.getId());
-    } catch (exception err)
-    {
-        printf("%s", err.what());
+            if (op == 1)
+            {
+                string nome;
+                string cpf;
+                string senha;
+
+                printf("Nome:");
+                cin >> nome;
+                printf("Cpf:");
+                cin >> cpf;
+                printf("Senha:");
+                cin >> senha;
+
+                cliente.adicionar(nome, cpf, senha, false, 0.0);
+            }
+            else if (op == 2)
+            {
+                string cpf;
+                string senha;
+
+                printf("Cpf:");
+                cin >> cpf;
+
+                cliente.buscarPorCpf(cpf);
+
+                printf("Senha:");
+                cin >> senha;
+                cliente.logar(senha);
+            }
+            else if (op == 3)
+            {
+                printf("Valor:");
+                double valor;
+                scanf("%lf", &valor);
+                cliente.sacar(cliente.getCpf(), valor);
+            }
+            else if (op == 4)
+            {
+                printf("Valor:");
+                double valor;
+                scanf("%lf", &valor);
+                cliente.depositar(cliente.getCpf(), valor);
+            }
+            else if (op == 5)
+            {
+                mostrarCliente(&cliente);
+            }
+            else if (op == 6)
+            {
+                cliente.deslogar();
+            }
+            else if (op == 7)
+            {
+                
+                printf("Tenha uma otima semana!");
+                break;
+            }
+            else
+            {
+                printf("Opcao invalida");
+                break;
+            }
+
+
+        } catch (exception err)
+        {
+            printf("%s", err.what());
+        }
     }
 
     sqlite3_close(db);

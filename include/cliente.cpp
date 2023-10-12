@@ -151,10 +151,31 @@ void Cliente::sacar(string Cpf, double valor)
     atualizar(this->Nome, this->Cpf, this->Senha, this->Bloqueado, this->Saldo - valor);
 }
 
+void Cliente::depositar(string Cpf, double valor)
+{
+    buscarPorCpf(Cpf);
+    if (this->Bloqueado)
+    {
+        throw exception("Conta bloqueada");
+    }
+    if (!this->logado)
+    {
+        throw exception("Conta nao logada");
+    }
+    if (valor <= 0)
+    {
+        throw exception("Não e possivel depositar esse valor");
+    }
+
+    atualizar(this->Nome, this->Cpf, this->Senha, this->Bloqueado, this->Saldo + valor);
+}
+
 void Cliente::logar(string senha){
     if(this->Senha == senha){
         this->logado = true;
+        return;
     }
+    throw exception("Senha incorreta");
 }
 
 void Cliente::deslogar(){
